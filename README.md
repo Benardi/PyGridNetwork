@@ -1,2 +1,2 @@
 # GridNetwork
-A network router for PyGrid platform.
+A network router used by the PyGrid platform.

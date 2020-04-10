@@ -1,0 +1,5 @@
+pytest
+coverage
+black
+flake8
+pep8-naming

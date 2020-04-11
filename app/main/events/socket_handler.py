@@ -1,5 +1,6 @@
 import queue
 from ..workers import Worker
+from ..codes import WORKER_PROPERTIES
 
 
 class Singleton(type):
@@ -59,8 +60,7 @@ class SocketHandler(metaclass=Singleton):
         worker = self.__retrieve_worker_by_socket(socket)
         if worker:
             self.connections[worker._id]._socket = None
-
-        return worker._id
+            return worker._id
 
     def __retrieve_worker_by_socket(self, socket):
         for worker_id, worker in self.connections.items():

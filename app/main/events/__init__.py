@@ -2,7 +2,7 @@ from .. import ws
 from ..codes import MSG_FIELD, EVENT_ROUTES
 
 from .socket_handler import SocketHandler
-from .network import register_node, health_check, forward
+from .network import *
 from .node_properties import *
 import json
 
@@ -15,6 +15,7 @@ routes = {
     EVENT_ROUTES.UPDATE_MODELS: update_model_infos,
     EVENT_ROUTES.UPDATE_DATASETS: update_dataset_infos,
     EVENT_ROUTES.UPDATE_NODES: update_connected_nodes,
+    EVENT_ROUTES.FORWARD: forward,
 }
 
 
@@ -22,7 +23,7 @@ def route_request(message, socket):
     global routes
 
     message = json.loads(message)
-
+    print("Message: ", message)
     if message and message.get(MSG_FIELD.TYPE, None) in routes.keys():
         return routes[message[MSG_FIELD.TYPE]](message, socket)
     else:

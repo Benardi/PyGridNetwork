@@ -1,5 +1,7 @@
 from .socket_handler import SocketHandler
+from ..codes import MSG_FIELD
 import threading
+import json
 
 socket_handler = SocketHandler()
 
@@ -18,7 +20,8 @@ def register_node(message, socket):
 
 
 def forward(message, socket):
-    dest = message["destination"]
+    dest = message[MSG_FIELD.DESTINATION]
     worker = socket_handler.get(dest)
     if worker:
-        worker.send(message["content"])
+        content = json.dumps(message[MSG_FIELD.CONTENT])
+        worker.send(content)

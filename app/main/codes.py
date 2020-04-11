@@ -5,6 +5,7 @@ class EVENT_ROUTES:
     UPDATE_MODELS = "update-models"
     UPDATE_DATASETS = "update-dataset"
     UPDATE_NODES = "update-nodes"
+    FORWARD = "forward"
 
 
 class WORKER_STATUS:
@@ -18,6 +19,9 @@ class MSG_FIELD:
     MODELS = "get-models"
     DATASETS = "get-datasets"
     NODES = "get-nodes"
+    FROM = "from"
+    DESTINATION = "destination"
+    CONTENT = "content"
 
 
 class WORKER_PROPERTIES:

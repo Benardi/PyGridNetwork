@@ -22,6 +22,7 @@ class MSG_FIELD:
     FROM = "from"
     DESTINATION = "destination"
     CONTENT = "content"
+    NODE_ID = "node_id"
 
 
 class WORKER_PROPERTIES:

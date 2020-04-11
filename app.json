@@ -1,0 +1,7 @@
+{
+  "name": "Grid Network backend",
+  "description": "PyGrid Platform backedn to route websocket nodes",
+  "repository": "https://github.com/OpenMined/GridNetwork.git",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["python", "machine-learning", "privacy", "peer-to-peer"]
+}

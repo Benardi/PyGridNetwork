@@ -12,7 +12,7 @@ class Worker(object):
         self._status = WORKER_PROPERTIES.ONLINE
         self._model_infos = {}
         self.dataset_infos = {}
-        self.connected_nodes = {}
+        self._connected_nodes = {}
 
     @property
     def status(self):
@@ -45,7 +45,7 @@ class Worker(object):
         return self._connected_nodes
 
     def check_health(self):
-        while not self._socket.closed:
+        while self._socket:
             self.__begin = time.time()
             self._socket.send(json.dumps({MSG_FIELD.TYPE: EVENT_ROUTES.PING}))
             time.sleep(WORKER_PROPERTIES.HEALTH_CHECK_INTERVAL)
@@ -56,4 +56,4 @@ class Worker(object):
     def update_ping_rate(self):
         if self.__begin:
             end = time.time()
-            self._ping = end - self.__begin * 1000
+            self._ping = (end - self.__begin) * 1000

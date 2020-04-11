@@ -12,7 +12,7 @@ def health_check(message, socket):
 
 
 def register_node(message, socket):
-    node_id = message["id"]
+    node_id = message[MSG_FIELD.NODE_ID]
     worker = socket_handler.new_connection(node_id, socket)
     t = threading.Thread(target=worker.check_health)
     t.start()
@@ -23,5 +23,5 @@ def forward(message, socket):
     dest = message[MSG_FIELD.DESTINATION]
     worker = socket_handler.get(dest)
     if worker:
-        content = json.dumps(message[MSG_FIELD.CONTENT])
-        worker.send(content)
+        content = message[MSG_FIELD.CONTENT]
+        worker.send(json.dumps(content))

@@ -10,11 +10,12 @@ socket_handler = SocketHandler()
 @http.route("/nodes", methods=["GET"])
 def connected_nodes():
     response = {}
-    for node in socket_handler.nodes:
-        response[node._id] = {
+    for node_id, node in socket_handler.nodes:
+        response[node_id] = {
             "address": node.address,
             "status": node.status,
             "nodes": node.connected_nodes,
+            "location": node.location,
         }
 
     response_body = json.dumps(response)

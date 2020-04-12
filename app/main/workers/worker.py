@@ -1,5 +1,7 @@
 import time
 import json
+import requests
+import re
 
 from ..codes import MSG_FIELD, EVENT_ROUTES, WORKER_PROPERTIES
 
@@ -22,6 +24,27 @@ class Worker(object):
             return WORKER_PROPERTIES.ONLINE
         else:
             return WORKER_PROPERTIES.BUSY
+
+    @property
+    def address(self):
+        if self._socket:
+            addr = self._socket.environ["REMOTE_ADDR"]
+            return re.sub("[:f]", "", addr)
+
+    @property
+    def location(self):
+        if self.address:
+            url = "http://ip-api.com/json/{}".format(self.address)
+            r = requests.get(url)
+            result = json.loads(r.text)
+            if result["status"] == "success":
+                return {
+                    "region": result["regionName"],
+                    "country": result["country"],
+                    "city": result["city"],
+                }
+            else:
+                return {}
 
     @property
     def models(self):

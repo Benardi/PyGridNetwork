@@ -6,6 +6,6 @@
   "scripts": {
     "postdeploy": "apt update & apt install libavdevice-dev libavfilter-dev libopus-dev libvpx-dev pkg-config",
     "pr-predestroy": "bundle exec rake cleanup",
-  }
+  },
   "keywords": ["python", "machine-learning", "privacy", "peer-to-peer"]
 }

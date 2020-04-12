@@ -3,9 +3,5 @@
   "description": "PyGrid Network backend to connect/route websocket nodes",
   "repository": "https://github.com/OpenMined/GridNetwork.git",
   "logo": "https://github.com/OpenMined/design-assets/blob/master/logos/PyGrid/vertical-alt-dark.png",
-  "scripts": {
-    "postdeploy": "apt update & apt install libavdevice-dev libavfilter-dev libopus-dev libvpx-dev pkg-config",
-    "pr-predestroy": "bundle exec rake cleanup",
-  },
   "keywords": ["python", "machine-learning", "privacy", "peer-to-peer"]
 }

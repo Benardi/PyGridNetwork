@@ -1,4 +1,3 @@
-aiortc
 flask
 flask_sockets
 gevent

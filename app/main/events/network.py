@@ -6,15 +6,15 @@ import json
 socket_handler = SocketHandler()
 
 
-def health_check(message, socket):
+def update_node(message, socket):
     worker = socket_handler.get(socket)
-    worker.update_ping_rate()
+    worker.update_node_infos(message)
 
 
 def register_node(message, socket):
     node_id = message[MSG_FIELD.NODE_ID]
     worker = socket_handler.new_connection(node_id, socket)
-    t = threading.Thread(target=worker.check_health)
+    t = threading.Thread(target=worker.monitor)
     t.start()
     return {"status": "success!"}
 

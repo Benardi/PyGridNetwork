@@ -45,6 +45,7 @@ class SocketHandler(metaclass=Singleton):
 
     def get(self, query):
         if isinstance(query, str):
+            print(self.connections)
             return self.connections.get(query, None)
         else:
             return self.__retrieve_worker_by_socket(query)
@@ -60,6 +61,7 @@ class SocketHandler(metaclass=Singleton):
         worker = self.__retrieve_worker_by_socket(socket)
         if worker:
             self.connections[worker._id]._socket = None
+            self.connections[worker._id].connected_nodes = []
             return worker._id
 
     def __retrieve_worker_by_socket(self, socket):

@@ -29,10 +29,11 @@ def node_infos(id):
 
     if worker:
         response["id"] = worker._id
+        response["status"] = worker.status
         response["address"] = worker.address
         response["nodes"] = worker.connected_nodes
         response["datasets"] = worker.hosted_datasets
-        response["models"] = worker.hosted_models
+        response["models"] = list(worker.hosted_models.keys())
         response_body = json.dumps(response)
         return Response(response_body, status=200, mimetype="application/json")
     else:

@@ -2,8 +2,10 @@ import time
 import json
 import requests
 import re
+import asyncio
 
-from ..codes import MSG_FIELD, EVENT_ROUTES, WORKER_PROPERTIES
+from ..codes import MSG_FIELD, GRID_EVENTS, NODE_EVENTS, WORKER_PROPERTIES
+from ..utils.wrappers import threaded
 
 
 class Worker(object):
@@ -12,15 +14,15 @@ class Worker(object):
         self._socket = socket
         self._ping = 0
         self._status = WORKER_PROPERTIES.ONLINE
-        self._model_infos = {}
-        self.dataset_infos = {}
-        self._connected_nodes = {}
+        self.connected_nodes = {}
+        self.hosted_models = {}
+        self.hosted_datasets = {}
 
     @property
     def status(self):
         if not self._socket:
             return WORKER_PROPERTIES.OFFLINE
-        elif self._ping < 100:
+        elif self._ping < WORKER_PROPERTIES.PING_THRESHOLD:
             return WORKER_PROPERTIES.ONLINE
         else:
             return WORKER_PROPERTIES.BUSY
@@ -46,37 +48,21 @@ class Worker(object):
             else:
                 return {}
 
-    @property
-    def models(self):
-        payload = {MSG_FIELD.TYPE: MSG_FIELD.MODELS}
-        self._socket.send(json.dumps(payload))
-
-        return self._model_infos
-
-    @property
-    def datasets(self):
-        payload = {MSG_FIELD.TYPE: MSG_FIELD.DATASETS}
-        self._socket.send(json.dumps(payload))
-
-        return self._dataset_infos
-
-    @property
-    def connected_nodes(self):
-        payload = {MSG_FIELD.TYPE: MSG_FIELD.NODES}
-        self._socket.send(json.dumps(payload))
-
-        return self._connected_nodes
-
-    def check_health(self):
-        while self._socket:
-            self.__begin = time.time()
-            self._socket.send(json.dumps({MSG_FIELD.TYPE: EVENT_ROUTES.PING}))
-            time.sleep(WORKER_PROPERTIES.HEALTH_CHECK_INTERVAL)
-
     def send(self, message):
         self._socket.send(message)
 
-    def update_ping_rate(self):
+    # Run it in a different thread
+    @threaded
+    def monitor(self):
+        while self._socket:
+            self.__begin = time.time()
+            self._socket.send(json.dumps({MSG_FIELD.TYPE: NODE_EVENTS.MONITOR}))
+            time.sleep(WORKER_PROPERTIES.HEALTH_CHECK_INTERVAL)
+
+    def update_node_infos(self, message):
         if self.__begin:
             end = time.time()
             self._ping = (end - self.__begin) * 1000
+            self.connected_nodes = message[MSG_FIELD.NODES]
+            self.hosted_models = message[MSG_FIELD.MODELS]
+            self.hosted_datasets = message[MSG_FIELD.DATASETS]

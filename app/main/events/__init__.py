@@ -1,21 +1,16 @@
 from .. import ws
-from ..codes import MSG_FIELD, EVENT_ROUTES
+from ..codes import MSG_FIELD, GRID_EVENTS
 
 from .socket_handler import SocketHandler
 from .network import *
-from .node_properties import *
 import json
 
 socket_handler = SocketHandler()
 
 routes = {
-    EVENT_ROUTES.JOIN: register_node,
-    EVENT_ROUTES.PING: health_check,
-    EVENT_ROUTES.FORWARD: forward,
-    EVENT_ROUTES.UPDATE_MODELS: update_model_infos,
-    EVENT_ROUTES.UPDATE_DATASETS: update_dataset_infos,
-    EVENT_ROUTES.UPDATE_NODES: update_connected_nodes,
-    EVENT_ROUTES.FORWARD: forward,
+    GRID_EVENTS.JOIN: register_node,
+    GRID_EVENTS.MONITOR_ANSWER: update_node,
+    GRID_EVENTS.FORWARD: forward,
 }
 
 

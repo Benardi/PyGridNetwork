@@ -1,28 +1,28 @@
-class EVENT_ROUTES:
+class GRID_EVENTS:
     JOIN = "join"
-    PING = "ping"
     FORWARD = "forward"
-    UPDATE_MODELS = "update-models"
-    UPDATE_DATASETS = "update-dataset"
-    UPDATE_NODES = "update-nodes"
-    FORWARD = "forward"
+    MONITOR_ANSWER = "monitor-answer"
 
 
-class WORKER_STATUS:
-    ONLINE = 1
-    OFFLINE = 2
-    BUSY = 3
+class NODE_EVENTS:
+    MONITOR = "monitor"
+    WEBRTC_SCOPE = "create-webrtc-scope"
+    WEBRTC_OFFER = "webrtc-offer"
+    WEBRTC_ANSWER = "webrtc-answer"
 
 
 class MSG_FIELD:
     TYPE = "type"
-    MODELS = "get-models"
-    DATASETS = "get-datasets"
-    NODES = "get-nodes"
     FROM = "from"
     DESTINATION = "destination"
     CONTENT = "content"
     NODE_ID = "node_id"
+    MODELS = "models"
+    DATASETS = "datasets"
+    NODES = "nodes"
+    STATUS = "status"
+    SUCCESS = "success"
+    ERROR = "error"
 
 
 class WORKER_PROPERTIES:
@@ -30,3 +30,4 @@ class WORKER_PROPERTIES:
     ONLINE = "online"
     BUSY = "busy"
     OFFLINE = "offline"
+    PING_THRESHOLD = 100

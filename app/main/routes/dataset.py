@@ -11,9 +11,8 @@ socket_handler = SocketHandler()
 def get_datasets():
     response = {}
 
-    for node in socket_handler.nodes:
-        response[node._id] = node.datasets
+    for node_id, node in socket_handler.nodes:
+        response[node_id] = node.hosted_datasets
 
     response_body = json.dumps(response)
-
-    return Response(response_body, status_code=200, mimetype="application/json")
+    return Response(response_body, status=200, mimetype="application/json")

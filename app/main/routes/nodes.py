@@ -39,6 +39,9 @@ def node_infos(id):
         response["nodes"] = worker.connected_nodes
         response["datasets"] = worker.hosted_datasets
         response["models"] = list(worker.hosted_models.keys())
+        response["cpu"] = node.cpu_percent
+        response["memory"] = node.mem_usage
+
         response_body = json.dumps(response)
         return Response(response_body, status=200, mimetype="application/json")
     else:

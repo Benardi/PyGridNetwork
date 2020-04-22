@@ -17,6 +17,8 @@ class Worker(object):
         self.connected_nodes = {}
         self.hosted_models = {}
         self.hosted_datasets = {}
+        self.cpu_percent = 0
+        self.mem_usage = 0
 
     @property
     def status(self):
@@ -66,3 +68,5 @@ class Worker(object):
             self.connected_nodes = message[MSG_FIELD.NODES]
             self.hosted_models = message[MSG_FIELD.MODELS]
             self.hosted_datasets = message[MSG_FIELD.DATASETS]
+            self.cpu_percent = message[MSG_FIELD.CPU]
+            self.mem_usage = message[MSG_FIELD.MEM_USAGE]

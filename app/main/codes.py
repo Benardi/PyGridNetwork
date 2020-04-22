@@ -23,6 +23,8 @@ class MSG_FIELD:
     STATUS = "status"
     SUCCESS = "success"
     ERROR = "error"
+    CPU = "cpu"
+    MEM_USAGE = "mem_usage"
 
 
 class WORKER_PROPERTIES:

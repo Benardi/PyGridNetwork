@@ -45,7 +45,6 @@ class SocketHandler(metaclass=Singleton):
 
     def get(self, query):
         if isinstance(query, str):
-            print(self.connections)
             return self.connections.get(query, None)
         else:
             return self.__retrieve_worker_by_socket(query)

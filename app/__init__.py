@@ -1,5 +1,9 @@
+import pbr.version
 from flask import Flask
 from flask_sockets import Sockets
+
+__version__ = pbr.version.VersionInfo('touvlo').version_string()
+__all__ = ['main']
 
 DEFAULT_SECRET_KEY = "justasecretkeythatishouldputhere"
 

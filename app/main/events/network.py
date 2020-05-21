@@ -13,6 +13,7 @@ def update_node(message, socket):
 
 
 def register_node(message, socket):
+    time.sleep(1)
     node_id = message[MSG_FIELD.NODE_ID]
     worker = socket_handler.new_connection(node_id, socket)
     t = threading.Thread(target=worker.monitor)

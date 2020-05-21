@@ -6,27 +6,6 @@ import json
 
 socket_handler = SocketHandler()
 
-
-@http.route("/nodes", methods=["GET"])
-def connected_nodes():
-    response = {}
-    nodes = []
-    for node_id, node in socket_handler.nodes:
-        nodes.append(
-            {
-                "id": node_id,
-                "address": node.address,
-                "status": node.status,
-                "nodes": node.connected_nodes,
-                "location": node.location,
-            }
-        )
-
-    response["nodes"] = nodes
-    response_body = json.dumps(response)
-    return Response(response_body, status=200, mimetype="application/json")
-
-
 @http.route("/node/<id>")
 def node_infos(id):
     worker = socket_handler.get(id)

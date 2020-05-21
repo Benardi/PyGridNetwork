@@ -2,6 +2,7 @@ from .socket_handler import SocketHandler
 from ..codes import MSG_FIELD
 import threading
 import json
+import time
 
 socket_handler = SocketHandler()
 
@@ -20,6 +21,7 @@ def register_node(message, socket):
 
 
 def forward(message, socket):
+    time.sleep(1)
     dest = message[MSG_FIELD.DESTINATION]
     worker = socket_handler.get(dest)
     if worker:

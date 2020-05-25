@@ -1,7 +1,6 @@
 #!/bin/env python
 
-from app import create_app
-
+from gridnetwork import create_app
 
 from gevent import pywsgi
 from geventwebsocket.handler import WebSocketHandler

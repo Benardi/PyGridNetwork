@@ -1,3 +1,5 @@
+from gevent import pywsgi
+from geventwebsocket.handler import WebSocketHandler
 from flask import Flask, Blueprint
 from flask_sockets import Sockets
 
@@ -18,3 +20,9 @@ def create_app(debug=False, secret_key=DEFAULT_SECRET_KEY):
     sockets.register_blueprint(ws, url_prefix=r"/")
 
     return app
+
+def raise_grid():
+    app = create_app()
+    server = pywsgi.WSGIServer(("", 5000), app, handler_class=WebSocketHandler)
+    server.serve_forever()
+    return app, server

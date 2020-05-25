@@ -1,14 +1,9 @@
 #!/bin/env python
 
-from gridnetwork import create_app
-
-from gevent import pywsgi
-from geventwebsocket.handler import WebSocketHandler
+from gridnetwork import create_app, raise_grid
 
 
 if __name__ == "__main__":
-    app = create_app()
-    server = pywsgi.WSGIServer(("", 5000), app, handler_class=WebSocketHandler)
-    server.serve_forever()
+    app,server = raise_grid()
 else:
     app = create_app()

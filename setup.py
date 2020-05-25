@@ -48,6 +48,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    entry_points={'console_scripts': ['raise_grid=gridnetwork:raise_grid']},
     python_requires=">=3.5, <4",
     project_urls={
         "Bug Reports": "https://github.com/OpenMined/GridNetwork/issues",

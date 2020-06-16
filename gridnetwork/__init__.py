@@ -5,6 +5,9 @@ from flask_sockets import Sockets
 
 ws = Blueprint(r"ws", __name__)
 http = Blueprint(r"http", __name__)
+
+from . import routes, events
+
 DEFAULT_SECRET_KEY = "justasecretkeythatishouldputhere"
 __version__ = "0.1.0"
 

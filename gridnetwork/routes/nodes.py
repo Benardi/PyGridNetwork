@@ -6,6 +6,7 @@ import json
 
 socket_handler = SocketHandler()
 
+
 @http.route("/node/<id>")
 def node_infos(id):
     try:

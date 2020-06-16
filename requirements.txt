@@ -4,3 +4,5 @@ flask_sockets
 gevent-websocket
 gunicorn
 requests
+flask_sqlalchemy
+flask_migrate

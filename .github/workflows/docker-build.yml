@@ -1,0 +1,22 @@
+name: Docker build
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 2 * * 0' # Weekly on Sundays at 02:00
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Update PyGridNetwork Image
+      if: github.repository == 'OpenMined/PyGridNetwork'
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        repository: openmined/pygridnetwork
+        tags: latest

@@ -1,6 +1,9 @@
 ![pygrid-logo](https://raw.githubusercontent.com/OpenMined/design-assets/master/logos/PyGrid/horizontal-primary-trans.png)
 
 <p align="center">
+    <a href="https://github.com/OpenMined/PyGridNetwork/actions?query=workflow%3ATests">
+        <img src="https://github.com/OpenMined/PyGridNetwork/workflows/Tests/badge.svg"
+            alt="Tests"/></a>
     <a href="https://img.shields.io/github/license/OpenMined/GridNetwork">
         <img src="https://img.shields.io/github/license/OpenMined/GridNetwork"
             alt="License"/></a>
